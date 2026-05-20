@@ -411,7 +411,7 @@
         // DYNAMIC CMS FETCH SCRIPT (Admin Binding)
         async function syncWithAdminBackend() {
             try {
-                const res = await fetch('http://localhost:5000/api/content');
+                const res = await fetch('/api/content');
                 const content = await res.json();
 
                 if (!content.sections.questions) document.getElementById('questions').style.display = 'none';
