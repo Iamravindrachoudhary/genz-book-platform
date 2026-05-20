@@ -8,53 +8,29 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         body {
-            background-color: #030008;
-            color: #e5e5e5;
-            font-family: 'Inter', sans-serif;
-            overflow-x: hidden;
-            background-image: 
-                radial-gradient(circle at 10% 40%, rgba(120, 0, 255, 0.1), transparent 30%),
-                radial-gradient(circle at 90% 70%, rgba(255, 0, 128, 0.1), transparent 30%);
+            background-color: #030008; color: #e5e5e5; font-family: 'Inter', sans-serif; overflow-x: hidden;
+            background-image: radial-gradient(circle at 10% 40%, rgba(120, 0, 255, 0.1), transparent 30%), radial-gradient(circle at 90% 70%, rgba(255, 0, 128, 0.1), transparent 30%);
             /* SLEEK APPLE PENCIL CURSOR */
             cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="%23ffffff" stroke="%23cccccc" stroke-width="1.5"><path d="M21.17 3.25a2.41 2.41 0 0 0-3.41 0L4.14 16.86c-.2.2-.36.46-.46.75L2 22l4.39-1.68c.29-.1.55-.26.75-.46l13.61-13.61a2.41 2.41 0 0 0 0-3.41z"/></svg>') 2 22, auto;
         }
         a, button, input, textarea, [onclick] {
-            /* APPLE PENCIL CURSOR (HOVER - NEON ACCENT) */
             cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="%2300ffcc" stroke="%23ffffff" stroke-width="1.5"><path d="M21.17 3.25a2.41 2.41 0 0 0-3.41 0L4.14 16.86c-.2.2-.36.46-.46.75L2 22l4.39-1.68c.29-.1.55-.26.75-.46l13.61-13.61a2.41 2.41 0 0 0 0-3.41z"/></svg>') 2 22, pointer;
         }
-
-        /* DYNAMIC PRESSURE METER */
         .pressure-container { width: 100%; height: 8px; background: #222; border-radius: 10px; overflow: hidden; margin-top: 15px; }
         .pressure-bar { height: 100%; width: 98%; background: linear-gradient(90deg, #ff007f, #ff0000); animation: pulse-pressure 0.4s infinite alternate; }
         @keyframes pulse-pressure { 0% { opacity: 0.8; transform: scaleX(0.98); } 100% { opacity: 1; transform: scaleX(1); } }
-
-        /* MASONRY GRID FOR 15 QUESTIONS */
         .masonry-grid { column-count: 1; column-gap: 1.5rem; }
         @media (min-width: 640px) { .masonry-grid { column-count: 2; } }
         @media (min-width: 1024px) { .masonry-grid { column-count: 3; } }
-        .masonry-item {
-            break-inside: avoid; margin-bottom: 1.5rem;
-            background: rgba(10, 5, 20, 0.7); border: 1px solid rgba(0, 255, 204, 0.2); border-radius: 20px;
-            padding: 2.5rem; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); backdrop-filter: blur(12px);
-        }
+        .masonry-item { break-inside: avoid; margin-bottom: 1.5rem; background: rgba(10, 5, 20, 0.7); border: 1px solid rgba(0, 255, 204, 0.2); border-radius: 20px; padding: 2.5rem; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); backdrop-filter: blur(12px); }
         .masonry-item:hover { border-color: #ff007f; transform: translateY(-10px) scale(1.03); box-shadow: 0 15px 40px rgba(255, 0, 127, 0.25); z-index: 10; position: relative; }
-
-        /* TOXIC PHONE ANIMATION */
-        .phone-frame {
-            width: 300px; height: 600px; border: 6px solid #111; border-radius: 45px;
-            overflow: hidden; position: relative; background: #000;
-            box-shadow: 0 0 50px rgba(120, 0, 255, 0.4), inset 0 0 30px rgba(0,0,0,0.9);
-        }
+        .phone-frame { width: 300px; height: 600px; border: 6px solid #111; border-radius: 45px; overflow: hidden; position: relative; background: #000; box-shadow: 0 0 50px rgba(120, 0, 255, 0.4), inset 0 0 30px rgba(0,0,0,0.9); }
         .infinite-scroll { display: flex; flex-direction: column; gap: 12px; padding: 50px 15px; animation: scroll-toxic 10s linear infinite; }
-        .feed-item {
-            height: 160px; border-radius: 16px; display: flex; flex-direction: column; align-items: center; justify-content: center;
-            font-weight: 900; text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem; text-align: center; padding: 15px; position: relative; overflow: hidden;
-        }
+        .feed-item { height: 160px; border-radius: 16px; display: flex; flex-direction: column; align-items: center; justify-content: center; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem; text-align: center; padding: 15px; position: relative; overflow: hidden; }
         .item-hate { background: rgba(255,0,0,0.15); border: 1px solid #ff0000; color: #ff4444; }
         .item-fake { background: rgba(255,0,128,0.15); border: 1px solid #ff007f; color: #ff007f; }
         .item-anxiety { background: rgba(120,0,255,0.15); border: 1px solid #7800ff; color: #b070ff; }
         @keyframes scroll-toxic { 0% { transform: translateY(0); } 100% { transform: translateY(-688px); } }
-
         #payment-modal { display: none; backdrop-filter: blur(20px); }
         #payment-modal.active { display: flex; }
         ::-webkit-scrollbar { width: 8px; }
@@ -66,13 +42,11 @@
 
     <nav class="relative z-50 flex justify-between items-center px-6 md:px-12 py-5 border-b border-white/10 bg-[#030008]/80 backdrop-blur-2xl sticky top-0">
         <div class="bg-white px-4 py-1.5 rounded-lg transform -rotate-1 shadow-[0_0_20px_rgba(255,255,255,0.3)] border-2 border-gray-200">
-            <h1 class="text-xl md:text-2xl font-black tracking-tighter uppercase text-black">
-                GEN-Z DON'T EXPLAIN
-            </h1>
+            <h1 class="text-xl md:text-2xl font-black tracking-tighter uppercase text-black">GEN-Z DON'T EXPLAIN</h1>
         </div>
-
         <div class="hidden lg:flex space-x-10 text-xs font-black uppercase tracking-[0.2em] text-gray-400 items-center">
             <a href="#the-trap" class="hover:text-[#00ffcc] transition-colors">The Matrix</a>
+            <a href="#book-preview" class="hover:text-white transition-colors">Artifacts</a>
             <a href="#questions" class="hover:text-[#ff007f] transition-colors">15 Queries</a>
             <a href="#author" class="hover:text-[#7800ff] transition-colors">Author POV</a>
             <a href="#buy" class="text-black bg-[#00ffcc] px-5 py-2 rounded-full hover:bg-white transition-all shadow-[0_0_15px_rgba(0,255,204,0.4)]">Secure Manual</a>
@@ -88,30 +62,19 @@
                <circle cx="50" cy="50" r="20" fill="none" stroke="#ff007f" stroke-width="1.5" stroke-dasharray="4 4"/>
                <text x="40" y="56" font-size="20" class="animate-pulse">🕷️</text>
             </svg>
-            <div class="bg-black/90 border border-[#ff007f] text-[#ff007f] text-[10px] font-black uppercase tracking-widest px-3 py-1 mt-2 text-center opacity-0 group-hover:opacity-100 transition-opacity rounded">
-                Touch the Web
-            </div>
+            <div class="bg-black/90 border border-[#ff007f] text-[#ff007f] text-[10px] font-black uppercase tracking-widest px-3 py-1 mt-2 text-center opacity-0 group-hover:opacity-100 transition-opacity rounded">Touch the Web</div>
         </div>
 
         <div>
             <div class="inline-block px-5 py-2 rounded-full border border-red-500/50 bg-red-500/10 text-red-500 text-xs font-black uppercase tracking-widest mb-8 shadow-[0_0_15px_rgba(255,0,0,0.3)]">
                 <i class="fa-solid fa-triangle-exclamation animate-pulse mr-2"></i> Warning: Cognitive Overload
             </div>
-            
             <h2 class="text-6xl md:text-8xl font-black mb-8 tracking-tighter text-white leading-[0.9]">
                 BREAK <br> <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#00ffcc] to-[#ff007f]">THE LOOP.</span>
             </h2>
-            
             <div class="space-y-8 text-gray-300 font-medium text-lg leading-relaxed">
-                <p>
-                    <strong class="text-[#00ffcc] block text-xl mb-2"><i class="fa-solid fa-check-double mr-2"></i> WHAT YOU CRAVE:</strong> 
-                    Real connections, financial freedom, authentic experiences, and a purpose that doesn't rely on double-taps.
-                </p>
-                <p>
-                    <strong class="text-[#ff007f] block text-xl mb-2"><i class="fa-solid fa-skull-crossbones mr-2"></i> THE TRAP THEY SET:</strong> 
-                    Algorithmic anxiety. Doomscrolling. The crushing weight of fake aesthetics. The illusion that everyone else is winning.
-                </p>
-                
+                <p><strong class="text-[#00ffcc] block text-xl mb-2"><i class="fa-solid fa-check-double mr-2"></i> WHAT YOU CRAVE:</strong> Real connections, financial freedom, authentic experiences, and a purpose that doesn't rely on double-taps.</p>
+                <p><strong class="text-[#ff007f] block text-xl mb-2"><i class="fa-solid fa-skull-crossbones mr-2"></i> THE TRAP THEY SET:</strong> Algorithmic anxiety. Doomscrolling. The crushing weight of fake aesthetics. The illusion that everyone else is winning.</p>
                 <div class="p-6 bg-[#0a0514] border border-[#7800ff]/50 rounded-2xl relative overflow-hidden shadow-[0_0_30px_rgba(120,0,255,0.15)]">
                     <div class="absolute top-0 left-0 w-2 h-full bg-[#ff007f]"></div>
                     <div class="flex justify-between items-end mb-2">
@@ -122,7 +85,6 @@
                     <div class="pressure-container"><div class="pressure-bar"></div></div>
                 </div>
             </div>
-            
             <button onclick="document.getElementById('buy').scrollIntoView({behavior: 'smooth'})" class="mt-12 bg-gradient-to-r from-[#00ffcc] to-[#00b38f] text-black px-10 py-5 rounded-full text-sm font-black uppercase tracking-[0.2em] hover:scale-105 transition-all shadow-[0_0_40px_rgba(0,255,204,0.4)] flex items-center gap-3">
                 Secure The Manual <i class="fa-solid fa-unlock-keyhole"></i>
             </button>
@@ -158,17 +120,26 @@
             <p class="text-gray-400 mb-12 uppercase tracking-widest font-bold text-sm">Real copies in the real world.</p>
             
             <div class="grid md:grid-cols-3 gap-8">
-                <div class="aspect-[3/4] bg-[#05000a] border-2 border-dashed border-[#00ffcc]/50 rounded-3xl flex flex-col items-center justify-center text-center p-8 group hover:bg-[#00ffcc]/5 transition-all shadow-[0_0_30px_rgba(0,255,204,0.1)]">
-                    <i class="fa-solid fa-book text-6xl text-[#00ffcc]/50 mb-6 group-hover:scale-110 transition-transform"></i>
-                    <p class="text-[#00ffcc] font-mono text-xs uppercase tracking-widest font-bold">[ Insert Front Cover Image ]</p>
+                <div class="aspect-[3/4] bg-[#05000a] border-2 border-dashed border-[#00ffcc]/50 rounded-3xl overflow-hidden relative group hover:bg-[#00ffcc]/5 transition-all shadow-[0_0_30px_rgba(0,255,204,0.1)]">
+                    <img id="img-bookFront" src="" alt="" class="absolute inset-0 w-full h-full object-cover hidden">
+                    <div id="place-bookFront" class="absolute inset-0 flex flex-col items-center justify-center text-center p-8">
+                        <i class="fa-solid fa-book text-6xl text-[#00ffcc]/50 mb-6 group-hover:scale-110 transition-transform"></i>
+                        <p class="text-[#00ffcc] font-mono text-xs uppercase tracking-widest font-bold">[ Upload Front Cover in Admin ]</p>
+                    </div>
                 </div>
-                <div class="aspect-[3/4] bg-[#05000a] border-2 border-dashed border-[#ff007f]/50 rounded-3xl flex flex-col items-center justify-center text-center p-8 group hover:bg-[#ff007f]/5 transition-all shadow-[0_0_30px_rgba(255,0,127,0.1)]">
-                    <i class="fa-solid fa-book-open-reader text-6xl text-[#ff007f]/50 mb-6 group-hover:scale-110 transition-transform"></i>
-                    <p class="text-[#ff007f] font-mono text-xs uppercase tracking-widest font-bold">[ Insert Internal POV Image ]</p>
+                <div class="aspect-[3/4] bg-[#05000a] border-2 border-dashed border-[#ff007f]/50 rounded-3xl overflow-hidden relative group hover:bg-[#ff007f]/5 transition-all shadow-[0_0_30px_rgba(255,0,127,0.1)]">
+                    <img id="img-bookPov" src="" alt="" class="absolute inset-0 w-full h-full object-cover hidden">
+                    <div id="place-bookPov" class="absolute inset-0 flex flex-col items-center justify-center text-center p-8">
+                        <i class="fa-solid fa-book-open-reader text-6xl text-[#ff007f]/50 mb-6 group-hover:scale-110 transition-transform"></i>
+                        <p class="text-[#ff007f] font-mono text-xs uppercase tracking-widest font-bold">[ Upload Internal POV in Admin ]</p>
+                    </div>
                 </div>
-                <div class="aspect-[3/4] bg-[#05000a] border-2 border-dashed border-[#7800ff]/50 rounded-3xl flex flex-col items-center justify-center text-center p-8 group hover:bg-[#7800ff]/5 transition-all shadow-[0_0_30px_rgba(120,0,255,0.1)]">
-                    <i class="fa-solid fa-bookmark text-6xl text-[#7800ff]/50 mb-6 group-hover:scale-110 transition-transform"></i>
-                    <p class="text-[#7800ff] font-mono text-xs uppercase tracking-widest font-bold">[ Insert Back Cover Image ]</p>
+                <div class="aspect-[3/4] bg-[#05000a] border-2 border-dashed border-[#7800ff]/50 rounded-3xl overflow-hidden relative group hover:bg-[#7800ff]/5 transition-all shadow-[0_0_30px_rgba(120,0,255,0.1)]">
+                    <img id="img-bookBack" src="" alt="" class="absolute inset-0 w-full h-full object-cover hidden">
+                    <div id="place-bookBack" class="absolute inset-0 flex flex-col items-center justify-center text-center p-8">
+                        <i class="fa-solid fa-bookmark text-6xl text-[#7800ff]/50 mb-6 group-hover:scale-110 transition-transform"></i>
+                        <p class="text-[#7800ff] font-mono text-xs uppercase tracking-widest font-bold">[ Upload Back Cover in Admin ]</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -176,9 +147,7 @@
 
     <section id="questions" class="max-w-[1400px] mx-auto px-6 py-32 relative z-30">
         <div class="mb-20 text-center">
-            <div class="inline-block px-5 py-2 rounded-full border border-[#7800ff]/50 bg-[#7800ff]/10 text-[#b070ff] text-xs font-black uppercase tracking-widest mb-6">
-                Psychological Audit
-            </div>
+            <div class="inline-block px-5 py-2 rounded-full border border-[#7800ff]/50 bg-[#7800ff]/10 text-[#b070ff] text-xs font-black uppercase tracking-widest mb-6">Psychological Audit</div>
             <h2 class="text-5xl md:text-6xl font-black tracking-tight text-white mb-6">15 DECRYPTION <span class="text-[#ff007f]">KEYS</span></h2>
             <p class="text-lg text-gray-400 font-medium max-w-2xl mx-auto">If you can answer these honestly without flinching, you don't need this book. But you will flinch.</p>
         </div>
@@ -204,18 +173,16 @@
 
     <section id="buy" class="max-w-5xl mx-auto px-6 py-32 text-center relative z-30">
         <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#ff007f]/10 via-transparent to-transparent -z-10"></div>
-        
         <h2 class="text-6xl font-black mb-6 text-white tracking-tight uppercase">EXECUTE <span class="text-[#ff007f]">EXIT.</span></h2>
         <p class="text-gray-400 mb-16 text-xl font-medium max-w-3xl mx-auto">The algorithm wants you distracted. The manual gives you the blueprint to break free. Choose your extraction method below.</p>
 
         <div onclick="openPaymentModal()" class="bg-black border-2 border-[#00ffcc] rounded-[40px] p-12 mb-12 cursor-pointer transform hover:scale-105 transition-all duration-300 shadow-[0_0_50px_rgba(0,255,204,0.2)] relative overflow-hidden group">
             <div class="absolute top-0 right-0 bg-[#00ffcc] text-black text-sm font-black px-6 py-2 rounded-bl-2xl z-10 uppercase tracking-widest"><i class="fa-solid fa-bolt mr-2"></i> INSTANT ACCESS</div>
-            
             <i class="fa-solid fa-file-pdf text-7xl text-[#00ffcc] mb-6 group-hover:animate-bounce"></i>
             <h3 class="text-4xl text-white font-black mb-4 relative z-10 uppercase">The E-Book / PDF Manual</h3>
             <p class="text-gray-300 text-lg mb-10 font-medium max-w-2xl mx-auto relative z-10">Bypass shipping. Bypass the middleman. Download the unredacted digital copy instantly to your encrypted local drive.</p>
             <button class="bg-gradient-to-r from-[#00ffcc] to-[#00b38f] text-black px-16 py-6 rounded-full text-lg font-black uppercase tracking-[0.2em] hover:shadow-[0_0_30px_rgba(0,255,204,0.6)] transition-all relative z-10">
-                Purchase & Download ($9.99)
+                Purchase & Download (<span class="dyn-price">₹350</span>)
             </button>
         </div>
 
@@ -226,13 +193,13 @@
         </div>
         
         <div class="flex flex-wrap justify-center gap-6">
-            <a id="link-amazon" href="https://www.amazon.in/" target="_blank" class="flex items-center gap-3 px-10 py-5 bg-[#111] border border-[#333] text-white font-black rounded-2xl hover:border-[#ff9900] hover:bg-[#ff9900]/10 hover:text-[#ff9900] transition-all uppercase tracking-widest text-sm shadow-lg">
+            <a id="link-amazon" href="#" target="_blank" class="flex items-center gap-3 px-10 py-5 bg-[#111] border border-[#333] text-white font-black rounded-2xl hover:border-[#ff9900] hover:bg-[#ff9900]/10 hover:text-[#ff9900] transition-all uppercase tracking-widest text-sm shadow-lg">
                 <i class="fa-brands fa-amazon text-2xl"></i> Amazon
             </a>
-            <a id="link-flipkart" href="https://www.flipkart.com/" target="_blank" class="flex items-center gap-3 px-10 py-5 bg-[#111] border border-[#333] text-white font-black rounded-2xl hover:border-[#047bd5] hover:bg-[#047bd5]/10 hover:text-[#047bd5] transition-all uppercase tracking-widest text-sm shadow-lg">
+            <a id="link-flipkart" href="#" target="_blank" class="flex items-center gap-3 px-10 py-5 bg-[#111] border border-[#333] text-white font-black rounded-2xl hover:border-[#047bd5] hover:bg-[#047bd5]/10 hover:text-[#047bd5] transition-all uppercase tracking-widest text-sm shadow-lg">
                 <i class="fa-solid fa-cart-shopping text-2xl"></i> Flipkart
             </a>
-            <a id="link-myntra" href="https://www.myntra.com/" target="_blank" class="flex items-center gap-3 px-10 py-5 bg-[#111] border border-[#333] text-white font-black rounded-2xl hover:border-[#ff3f6c] hover:bg-[#ff3f6c]/10 hover:text-[#ff3f6c] transition-all uppercase tracking-widest text-sm shadow-lg">
+            <a id="link-myntra" href="#" target="_blank" class="flex items-center gap-3 px-10 py-5 bg-[#111] border border-[#333] text-white font-black rounded-2xl hover:border-[#ff3f6c] hover:bg-[#ff3f6c]/10 hover:text-[#ff3f6c] transition-all uppercase tracking-widest text-sm shadow-lg">
                 <i class="fa-solid fa-shirt text-2xl"></i> Myntra Merch
             </a>
         </div>
@@ -242,11 +209,7 @@
         <div class="relative group order-2 lg:order-1">
             <div class="absolute -inset-4 bg-gradient-to-r from-[#ff007f] to-[#7800ff] rounded-3xl blur-xl opacity-40 group-hover:opacity-80 transition duration-500"></div>
             <div class="aspect-[4/5] w-full max-w-lg mx-auto bg-black border-2 border-white/10 p-3 rounded-3xl relative overflow-hidden z-10 flex flex-col items-center justify-center text-center">
-                <img id="img-author" src="https://images.unsplash.com/photo-1618077360395-f3068be8e001?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Author" class="w-full h-full object-cover rounded-2xl filter grayscale contrast-125 group-hover:grayscale-0 transition-all duration-700 absolute inset-0 z-0 opacity-50">
-                <div class="relative z-10 p-6 bg-black/60 rounded-xl border border-white/20 backdrop-blur-sm">
-                    <i class="fa-solid fa-user-astronaut text-5xl text-[#7800ff] mb-4"></i>
-                    <p class="text-white font-mono text-sm uppercase tracking-widest">[ Insert Your Photo Here ]</p>
-                </div>
+                <img id="img-author" src="" alt="Author" class="w-full h-full object-cover rounded-2xl filter grayscale contrast-125 group-hover:grayscale-0 transition-all duration-700 absolute inset-0 z-0 opacity-80">
                 <div class="absolute bottom-6 left-6 bg-black/90 backdrop-blur-md border border-[#ff007f] px-6 py-3 rounded-xl text-sm font-black text-[#ff007f] uppercase tracking-widest shadow-[0_0_20px_rgba(255,0,127,0.3)] z-10">
                     <i class="fa-solid fa-terminal mr-2"></i> SYSTEM_ARCHITECT
                 </div>
@@ -260,15 +223,8 @@
             <h2 class="text-5xl md:text-6xl font-black mb-8 text-white tracking-tight uppercase">Meet The <span class="text-[#7800ff]">Architect.</span></h2>
             
             <div class="space-y-6 text-gray-300 font-medium text-lg leading-relaxed mb-12">
-                <p>
-                    I didn't write this from the outside; I wrote it while figuring out how to pick the lock from the inside. I watched the algorithm turn friends into metrics and passions into aesthetic trends. 
-                </p>
-                <p class="italic border-l-2 border-gray-600 pl-4 text-gray-400">
-                    [ Enter your personal story here. Explain your exact "why." Tell them what broke your illusion, why you couldn't stay silent, and why Gen-Z needs to hear this specific truth. Make it raw. ]
-                </p>
-                <p>
-                    This isn't theory. This is survival. Let's dismantle the fake reality and build something authentic.
-                </p>
+                <p id="txt-authorP1"></p>
+                <p id="txt-authorP2" class="italic border-l-2 border-[#7800ff] pl-4 text-gray-400"></p>
                 <p class="text-[#ff007f] font-black border-l-4 border-[#ff007f] pl-4 py-2 bg-[#ff007f]/10 rounded-r-lg">
                     Connect with me directly below. No PR team, no bots. Just real conversation.
                 </p>
@@ -287,15 +243,14 @@
 
     <section class="max-w-7xl mx-auto py-32 px-6 grid lg:grid-cols-2 gap-20 relative z-30 border-t border-white/10">
         <div>
-            <h2 class="text-4xl md:text-5xl font-black mb-10 text-white uppercase"><i class="fa-solid fa-satellite-dish text-[#ff007f] mr-4 animate-pulse"></i> Live Network Feed</h2>
-            <div id="reviewsBox" class="space-y-5 max-h-[600px] overflow-y-auto pr-4 custom-scrollbar">
-                </div>
+            <h2 id="dyn-review-title" class="text-4xl md:text-5xl font-black mb-10 text-white uppercase">Live Network Feed</h2>
+            <div id="reviewsBox" class="space-y-5 max-h-[600px] overflow-y-auto pr-4 custom-scrollbar"></div>
         </div>
         
         <div class="bg-[#05020a] p-12 rounded-[40px] border border-[#7800ff]/50 relative overflow-hidden shadow-[0_0_50px_rgba(120,0,255,0.15)] h-fit">
             <div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-[#7800ff] to-[#00ffcc]"></div>
-            <h2 class="text-3xl font-black mb-4 text-white uppercase">Inject Your Truth</h2>
-            <p class="text-gray-400 text-base mb-10 font-medium">Bypass the algorithm. Post your raw, unfiltered review directly to the global server feed.</p>
+            <h2 id="dyn-review-subtitle" class="text-3xl font-black mb-4 text-white uppercase">Inject Your Truth</h2>
+            <p class="text-gray-400 text-sm mb-10 font-bold border-l-2 border-[#ff007f] pl-3">Signals are intercepted by the Architect. Awaiting clearance before broadcasting to the public grid.</p>
             
             <form id="reviewForm">
                 <div class="mb-6 relative">
@@ -315,24 +270,13 @@
     <footer class="text-center py-16 border-t border-white/10 bg-black relative z-30">
         <div class="max-w-4xl mx-auto px-6">
             <h3 class="text-white font-black uppercase tracking-widest mb-8 text-lg">Join the Resistance</h3>
-            
             <div class="flex justify-center items-center gap-6 mb-10">
-                <a href="https://instagram.com" target="_blank" class="w-14 h-14 rounded-2xl bg-[#111] border border-[#333] flex items-center justify-center text-[#ff007f] hover:bg-gradient-to-tr hover:from-yellow-400 hover:via-red-500 hover:to-purple-500 hover:text-white hover:border-transparent transition-all text-2xl shadow-lg"><i class="fa-brands fa-instagram"></i></a>
-                <a href="https://youtube.com" target="_blank" class="w-14 h-14 rounded-2xl bg-[#111] border border-[#333] flex items-center justify-center text-red-600 hover:bg-red-600 hover:text-white hover:border-red-600 transition-all text-2xl shadow-lg"><i class="fa-brands fa-youtube"></i></a>
-                
-                <a href="https://x.com" target="_blank" class="w-14 h-14 rounded-2xl bg-[#111] border border-[#333] flex items-center justify-center text-white hover:bg-white hover:text-black hover:border-white transition-all shadow-lg p-3">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 1200 1227">
-                        <path d="M714.163 519.284L1160.89 0H1055.03L667.137 450.887L357.328 0H0L468.492 681.821L0 1226.37H105.866L515.491 750.218L842.672 1226.37H1200L714.137 519.284H714.163ZM569.165 687.828L521.697 619.934L144.011 79.6944H306.615L611.412 515.685L658.88 583.579L1055.08 1150.3H892.476L569.165 687.854V687.828Z"/>
-                    </svg>
+                <a id="link-ig" href="#" target="_blank" class="w-14 h-14 rounded-2xl bg-[#111] border border-[#333] flex items-center justify-center text-[#ff007f] hover:text-white transition-all text-2xl shadow-lg"><i class="fa-brands fa-instagram"></i></a>
+                <a id="link-yt" href="#" target="_blank" class="w-14 h-14 rounded-2xl bg-[#111] border border-[#333] flex items-center justify-center text-red-600 hover:text-white transition-all text-2xl shadow-lg"><i class="fa-brands fa-youtube"></i></a>
+                <a id="link-x" href="#" target="_blank" class="w-14 h-14 rounded-2xl bg-[#111] border border-[#333] flex items-center justify-center text-white hover:bg-white hover:text-black transition-all shadow-lg p-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 1200 1227"><path d="M714.163 519.284L1160.89 0H1055.03L667.137 450.887L357.328 0H0L468.492 681.821L0 1226.37H105.866L515.491 750.218L842.672 1226.37H1200L714.137 519.284H714.163ZM569.165 687.828L521.697 619.934L144.011 79.6944H306.615L611.412 515.685L658.88 583.579L1055.08 1150.3H892.476L569.165 687.854V687.828Z"/></svg>
                 </a>
-                
-                <a href="https://linkedin.com" target="_blank" class="w-14 h-14 rounded-2xl bg-[#111] border border-[#333] flex items-center justify-center text-[#0a66c2] hover:bg-[#0a66c2] hover:text-white hover:border-[#0a66c2] transition-all text-2xl shadow-lg"><i class="fa-brands fa-linkedin-in"></i></a>
-            </div>
-            
-            <div class="text-gray-500 text-sm font-black uppercase tracking-[0.2em] flex flex-wrap justify-center gap-6 mb-8">
-                <a href="mailto:RKUAMRJALORE@GMAIL.COM" class="hover:text-white transition-colors">RKUAMRJALORE@GMAIL.COM</a>
-                <span class="hidden md:inline">|</span>
-                <a href="tel:8000800219" class="hover:text-white transition-colors">+91 8000800219</a>
+                <a id="link-in" href="#" target="_blank" class="w-14 h-14 rounded-2xl bg-[#111] border border-[#333] flex items-center justify-center text-[#0a66c2] hover:text-white transition-all text-2xl shadow-lg"><i class="fa-brands fa-linkedin-in"></i></a>
             </div>
             <p class="text-[#444] text-xs font-black tracking-[0.2em] uppercase">© 2026 GEN-Z DON'T EXPLAIN. ESCAPE THE ALGORITHM.</p>
         </div>
@@ -340,172 +284,145 @@
 
     <div id="payment-modal" class="fixed inset-0 z-50 items-center justify-center bg-black/95 transition-all">
         <div class="bg-[#05000a] border-2 border-[#ff007f] w-full max-w-lg rounded-[40px] p-10 relative shadow-[0_0_80px_rgba(255,0,127,0.3)]">
-            <button onclick="closePaymentModal()" class="absolute top-8 right-8 text-gray-500 hover:text-[#00ffcc] transition-colors text-3xl">
-                <i class="fa-solid fa-circle-xmark"></i>
-            </button>
+            <button onclick="closePaymentModal()" class="absolute top-8 right-8 text-gray-500 hover:text-[#00ffcc] transition-colors text-3xl"><i class="fa-solid fa-circle-xmark"></i></button>
             <div class="text-center mb-10">
-                <div class="inline-block bg-[#ff007f]/10 text-[#ff007f] p-5 rounded-full mb-5">
-                    <i class="fa-solid fa-shield-halved text-4xl"></i>
-                </div>
+                <div class="inline-block bg-[#ff007f]/10 text-[#ff007f] p-5 rounded-full mb-5"><i class="fa-solid fa-shield-halved text-4xl"></i></div>
                 <h3 class="text-3xl font-black text-white mb-2 uppercase">Encrypted Checkout</h3>
-                <p class="text-sm font-black text-gray-400 tracking-widest uppercase">The Manual (E-Book PDF) • $9.99</p>
+                <p class="text-sm font-black text-gray-400 tracking-widest uppercase">The Manual (E-Book PDF) • <span class="dyn-price">₹350</span></p>
             </div>
-            
             <form onsubmit="processPayment(event)">
                 <div class="space-y-5 mb-10">
-                    <input type="email" placeholder="Email (Delivery Destination)" required class="w-full bg-black border-2 border-[#222] p-5 rounded-2xl text-white outline-none focus:border-[#ff007f] font-bold text-sm transition-colors">
-                    <input type="text" placeholder="Card Number" required pattern="\d{16}" title="16 digit format" class="w-full bg-black border-2 border-[#222] p-5 rounded-2xl text-white outline-none focus:border-[#ff007f] font-bold text-sm transition-colors">
+                    <input type="email" placeholder="Email (Delivery Destination)" required class="w-full bg-black border-2 border-[#222] p-5 rounded-2xl text-white outline-none focus:border-[#ff007f] font-bold text-sm">
+                    <input type="text" placeholder="Card Number" required pattern="\d{16}" title="16 digit format" class="w-full bg-black border-2 border-[#222] p-5 rounded-2xl text-white outline-none focus:border-[#ff007f] font-bold text-sm">
                     <div class="flex gap-5">
-                        <input type="text" placeholder="MM/YY" required class="w-1/2 bg-black border-2 border-[#222] p-5 rounded-2xl text-white outline-none focus:border-[#ff007f] font-bold text-sm transition-colors">
-                        <input type="text" placeholder="CVC" required class="w-1/2 bg-black border-2 border-[#222] p-5 rounded-2xl text-white outline-none focus:border-[#ff007f] font-bold text-sm transition-colors">
+                        <input type="text" placeholder="MM/YY" required class="w-1/2 bg-black border-2 border-[#222] p-5 rounded-2xl text-white outline-none focus:border-[#ff007f] font-bold text-sm">
+                        <input type="text" placeholder="CVC" required class="w-1/2 bg-black border-2 border-[#222] p-5 rounded-2xl text-white outline-none focus:border-[#ff007f] font-bold text-sm">
                     </div>
                 </div>
-                <button type="submit" id="pay-btn" class="w-full bg-[#ff007f] text-white font-black py-5 rounded-2xl text-sm uppercase tracking-[0.2em] hover:scale-105 hover:shadow-[0_0_30px_rgba(255,0,127,0.5)] transition-all flex justify-center items-center gap-3">
-                    Confirm Transfer ($9.99) <i class="fa-solid fa-lock"></i>
-                </button>
+                <button type="submit" id="pay-btn" class="w-full bg-[#ff007f] text-white font-black py-5 rounded-2xl text-sm uppercase tracking-[0.2em] hover:scale-105 transition-all flex justify-center items-center gap-3">Confirm Transfer (<span class="dyn-price">₹350</span>) <i class="fa-solid fa-lock"></i></button>
             </form>
         </div>
     </div>
 
     <script>
-        // Interactive Spider Web Trap Logic
+        // Spider Trap
         function triggerWebTrap() {
             const trapAlert = document.createElement('div');
             trapAlert.className = 'fixed inset-0 z-[999] bg-red-900/95 flex flex-col items-center justify-center backdrop-blur-xl cursor-pointer p-6 text-center';
-            trapAlert.innerHTML = `
-                <i class="fa-solid fa-spider text-8xl text-black mb-8 animate-bounce"></i>
-                <h1 class="text-5xl md:text-8xl font-black text-white uppercase tracking-tighter mb-6 shadow-black drop-shadow-2xl">YA, IT'S A TRAP.</h1>
-                <p class="text-[#ff007f] text-xl md:text-2xl font-black uppercase tracking-widest bg-black px-6 py-3 rounded-xl border border-[#ff007f]">
-                    The algorithm caught you tapping.
-                </p>
-                <p class="text-white mt-10 text-sm font-mono opacity-50 uppercase tracking-widest animate-pulse">[ Click anywhere to break free ]</p>
-            `;
+            trapAlert.innerHTML = `<i class="fa-solid fa-spider text-8xl text-black mb-8 animate-bounce"></i><h1 class="text-5xl md:text-8xl font-black text-white uppercase tracking-tighter mb-6">YA, IT'S A TRAP.</h1><p class="text-[#ff007f] text-xl font-black uppercase tracking-widest bg-black px-6 py-3 rounded-xl border border-[#ff007f]">The algorithm caught you tapping.</p>`;
             trapAlert.onclick = () => trapAlert.remove();
             document.body.appendChild(trapAlert);
         }
 
-        // Modal Handlers
+        // Modals & Payments
+        let currentPrice = "350";
         const modal = document.getElementById('payment-modal');
         function openPaymentModal() { modal.classList.add('active'); document.body.style.overflow = 'hidden'; }
         function closePaymentModal() { modal.classList.remove('active'); document.body.style.overflow = 'auto'; }
-        
         function processPayment(e) {
-            e.preventDefault();
-            const btn = document.getElementById('pay-btn');
-            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-2"></i> Verifying Keys...';
-            btn.classList.add('opacity-75', 'pointer-events-none');
-            
+            e.preventDefault(); const btn = document.getElementById('pay-btn');
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-2"></i> Verifying...';
             setTimeout(() => {
-                btn.innerHTML = '<i class="fa-solid fa-check mr-2"></i> Access Granted';
-                btn.classList.replace('bg-[#ff007f]', 'bg-green-500');
-                setTimeout(() => {
-                    alert('SUCCESS: The unredacted PDF has been securely dispatched to your email. Break the loop.');
-                    closePaymentModal();
-                    e.target.reset();
-                    btn.innerHTML = 'Confirm Transfer ($9.99) <i class="fa-solid fa-lock"></i>';
-                    btn.className = 'w-full bg-[#ff007f] text-white font-black py-5 rounded-2xl text-sm uppercase tracking-[0.2em] hover:scale-105 hover:shadow-[0_0_30px_rgba(255,0,127,0.5)] transition-all flex justify-center items-center gap-3';
+                btn.innerHTML = '<i class="fa-solid fa-check mr-2"></i> Access Granted'; btn.classList.replace('bg-[#ff007f]', 'bg-green-500');
+                setTimeout(() => { 
+                    alert('SUCCESS: PDF Dispatched.'); 
+                    closePaymentModal(); 
+                    e.target.reset(); 
+                    btn.innerHTML = `Confirm Transfer (₹${currentPrice})`; 
+                    btn.className = 'w-full bg-[#ff007f] text-white font-black py-5 rounded-2xl text-sm uppercase tracking-[0.2em] hover:scale-105 flex justify-center items-center gap-3'; 
                 }, 1000);
             }, 2500);
         }
 
-        // DYNAMIC CMS FETCH SCRIPT (Admin Binding)
+        // --- CMS FETCH INTEGRATION ---
         async function syncWithAdminBackend() {
             try {
                 const res = await fetch('/api/content');
                 const content = await res.json();
 
+                // Sections
                 if (!content.sections.questions) document.getElementById('questions').style.display = 'none';
-                else document.getElementById('questions').style.display = 'block';
-
                 if (!content.sections.artifacts) document.getElementById('book-preview').style.display = 'none';
-                else document.getElementById('book-preview').style.display = 'block';
-
                 if (!content.sections.author) document.getElementById('author').style.display = 'none';
-                else document.getElementById('author').style.display = 'grid'; 
 
-                const amz = document.getElementById('link-amazon');
-                const flp = document.getElementById('link-flipkart');
-                const myn = document.getElementById('link-myntra');
-                if (amz) amz.href = content.links.amazon;
-                if (flp) flp.href = content.links.flipkart;
-                if (myn) myn.href = content.links.myntra;
+                // Pricing update
+                if (content.pricing && content.pricing.bookPrice) {
+                    currentPrice = content.pricing.bookPrice;
+                    document.querySelectorAll('.dyn-price').forEach(el => el.innerText = '₹' + currentPrice);
+                }
 
-                const authorImg = document.getElementById('img-author');
-                if (authorImg && content.images.authorProfile) authorImg.src = content.images.authorProfile;
+                // Review Titles
+                if (content.reviewPanel) {
+                    document.getElementById('dyn-review-title').innerText = content.reviewPanel.title || "Live Network Feed";
+                    document.getElementById('dyn-review-subtitle').innerText = content.reviewPanel.subtitle || "Inject Your Truth";
+                }
 
-            } catch(e) {
-                console.log("CMS Sync Failed. Defaulting to local HTML parameters.");
-            }
+                // Links
+                if (content.links.amazon) document.getElementById('link-amazon').href = content.links.amazon;
+                if (content.links.flipkart) document.getElementById('link-flipkart').href = content.links.flipkart;
+                if (content.links.myntra) document.getElementById('link-myntra').href = content.links.myntra;
+
+                // Socials
+                if (content.social.instagram) document.getElementById('link-ig').href = content.social.instagram;
+                if (content.social.youtube) document.getElementById('link-yt').href = content.social.youtube;
+                if (content.social.x) document.getElementById('link-x').href = content.social.x;
+                if (content.social.linkedin) document.getElementById('link-in').href = content.social.linkedin;
+
+                // Texts
+                if (content.text.authorP1) document.getElementById('txt-authorP1').innerText = content.text.authorP1;
+                if (content.text.authorP2) document.getElementById('txt-authorP2').innerText = content.text.authorP2;
+
+                // Images (Handling Base64 or URLs)
+                if (content.images.authorProfile) document.getElementById('img-author').src = content.images.authorProfile;
+                
+                // Book Uploads Logic
+                if (content.images.bookFront) {
+                    document.getElementById('place-bookFront').classList.add('hidden');
+                    const img = document.getElementById('img-bookFront'); img.src = content.images.bookFront; img.classList.remove('hidden');
+                }
+                if (content.images.bookPov) {
+                    document.getElementById('place-bookPov').classList.add('hidden');
+                    const img = document.getElementById('img-bookPov'); img.src = content.images.bookPov; img.classList.remove('hidden');
+                }
+                if (content.images.bookBack) {
+                    document.getElementById('place-bookBack').classList.add('hidden');
+                    const img = document.getElementById('img-bookBack'); img.src = content.images.bookBack; img.classList.remove('hidden');
+                }
+
+            } catch(e) { console.log("CMS Sync Failed."); }
         }
 
-        // Live Reviews Data Fetching
-        
-const API_URL = '/api';
+        // Live Reviews Fetching (Only Approved ones show here)
         async function loadReviews() {
             try {
-                const res = await fetch(`${API_URL}/reviews`);
+                const res = await fetch('/api/reviews'); 
                 const data = await res.json();
-                const box = document.getElementById('reviewsBox');
-                box.innerHTML = data.map(r => `
+                document.getElementById('reviewsBox').innerHTML = data.map(r => `
                     <div class="bg-black/60 p-8 rounded-3xl border border-[#333] hover:border-[#7800ff]/50 transition-all shadow-lg">
-                        <div class="flex items-center justify-between mb-4">
-                            <span class="text-[#00ffcc] font-black text-base uppercase tracking-wider">${r.handle}</span>
-                            <span class="text-gray-500 text-xs font-bold"><i class="fa-solid fa-clock mr-1"></i> ${new Date(r.timestamp).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</span>
-                        </div>
+                        <div class="flex items-center justify-between mb-4"><span class="text-[#00ffcc] font-black text-base uppercase tracking-wider">${r.handle}</span><span class="text-gray-500 text-xs font-bold"><i class="fa-solid fa-clock mr-1"></i> ${new Date(r.timestamp).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</span></div>
                         <p class="text-gray-300 text-base font-medium leading-relaxed">"${r.text}"</p>
                     </div>
                 `).join('');
-            } catch(e) { 
-                document.getElementById('reviewsBox').innerHTML = `
-                    <div class="bg-red-950/30 p-8 rounded-3xl border border-red-500/50">
-                        <span class="text-red-500 font-black text-lg uppercase tracking-wider flex items-center gap-2 mb-2"><i class="fa-solid fa-triangle-exclamation"></i> SERVER DISCONNECTED</span>
-                        <p class="text-gray-300 text-base font-medium">Run server.js locally to view the uncensored live feed.</p>
-                    </div>
-                `;
+            } catch (e) {
+                console.error("Reviews offline");
             }
         }
 
+        // Submitting Review (Goes to Pending for Admin)
         document.getElementById('reviewForm').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const payload = { 
-                handle: document.getElementById('r-name').value, 
-                text: document.getElementById('r-text').value 
-            };
+            e.preventDefault(); 
+            const payload = { handle: document.getElementById('r-name').value, text: document.getElementById('r-text').value };
             const btn = e.target.querySelector('button');
-            const originalText = btn.innerHTML;
-            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Establishing Connection...';
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Intercepting...';
             
-            try {
-                await fetch(`${API_URL}/reviews`, {
-                    method: 'POST',
-                    headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify(payload)
-                });
-                e.target.reset();
-                loadReviews();
-            } catch(error) { 
-                const box = document.getElementById('reviewsBox');
-                const newReview = `
-                    <div class="bg-black/60 p-8 rounded-3xl border border-[#ff007f]/50 animate-pulse">
-                        <div class="flex items-center justify-between mb-4">
-                            <span class="text-[#ff007f] font-black text-base uppercase tracking-wider">${payload.handle}</span>
-                            <span class="text-[#ff007f] text-xs font-bold">JUST NOW</span>
-                        </div>
-                        <p class="text-gray-300 text-base font-medium leading-relaxed">"${payload.text}"</p>
-                    </div>
-                `;
-                if(box.innerHTML.includes('SERVER DISCONNECTED')) { box.innerHTML = newReview; }
-                else { box.insertAdjacentHTML('afterbegin', newReview); }
-                e.target.reset();
-            }
-            btn.innerHTML = originalText;
+            await fetch('/api/reviews', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(payload) });
+            
+            e.target.reset(); 
+            alert('SIGNAL INTERCEPTED: Your message is awaiting Architect clearance before broadcasting to the live grid.');
+            btn.innerHTML = 'Broadcast Message <i class="fa-solid fa-tower-broadcast"></i>';
         });
 
-        // Initialize Scripts
-        document.addEventListener('DOMContentLoaded', () => {
-            syncWithAdminBackend();
-            loadReviews();
-        });
+        document.addEventListener('DOMContentLoaded', () => { syncWithAdminBackend(); loadReviews(); });
     </script>
 </body>
 </html>
