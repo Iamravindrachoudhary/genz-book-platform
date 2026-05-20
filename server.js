@@ -27,8 +27,9 @@ let websiteContent = {
         myntra: "https://www.myntra.com/"
     },
     images: {
-        authorProfile: "https://images.unsplash.com/photo-1618077360395-f3068be8e001?auto=format&fit=crop&q=80"
-    }
+        images: {
+    authorProfile: "https://photos.fife.usercontent.google.com/pw/AP1GczM2vm2edZLq94KmVJaUeYncXEjsSsjBZk1NBlB80FyjOL4PFGiGmosPgQ=w147-h196-no?authuser=0"
+}    }
 };
 
 // --- 3. LIVE REVIEWS DATABASE ---
