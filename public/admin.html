@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SYSTEM_ARCHITECT | CONTROL PANEL</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { background-color: #030008; color: #00ffcc; font-family: 'Courier New', Courier, monospace; }
+        .hidden { display: none !important; }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #030008; }
+        ::-webkit-scrollbar-thumb { background: #ff007f; border-radius: 10px; }
+    </style>
+</head>
+<body class="antialiased min-h-screen flex flex-col items-center p-6">
+
+    <div class="w-full max-w-3xl flex justify-between items-center mb-10 border-b border-[#00ffcc]/30 pb-4">
+        <h1 class="text-xl font-black tracking-widest"><i class="fa-solid fa-terminal mr-2"></i> ARCHITECT_PANEL</h1>
+        <button id="logoutBtn" onclick="logout()" class="hidden text-red-500 hover:text-white uppercase text-xs font-bold tracking-widest transition-colors"><i class="fa-solid fa-power-off mr-1"></i> Terminate Session</button>
+    </div>
+
+    <div id="loginView" class="w-full max-w-md bg-[#0a0514] border border-[#00ffcc]/50 p-8 rounded-xl shadow-[0_0_30px_rgba(0,255,204,0.1)]">
+        <h2 class="text-2xl font-black mb-6 text-white uppercase">System Login</h2>
+        <form id="loginForm" onsubmit="handleLogin(event)">
+            <input type="text" id="username" placeholder="Username" required class="w-full bg-black border border-[#333] p-4 rounded text-white mb-4 focus:border-[#00ffcc] outline-none">
+            <input type="password" id="password" placeholder="Password" required class="w-full bg-black border border-[#333] p-4 rounded text-white mb-4 focus:border-[#00ffcc] outline-none">
+            <button type="submit" class="w-full bg-[#00ffcc] text-black font-black py-4 rounded uppercase tracking-widest hover:bg-white transition-colors mb-4">Authenticate</button>
+        </form>
+        <button onclick="triggerReset()" class="text-[#ff007f] text-xs uppercase tracking-widest hover:underline w-full text-center">Forgot Credentials?</button>
+    </div>
+
+    <div id="dashboardView" class="hidden w-full max-w-3xl">
+        <div class="bg-[#0a0514] border border-[#7800ff]/50 p-8 rounded-xl shadow-[0_0_30px_rgba(120,0,255,0.15)] mb-8">
+            <h2 class="text-2xl font-black mb-6 text-white uppercase border-b border-white/10 pb-4"><i class="fa-solid fa-code mr-2 text-[#7800ff]"></i> Core Content Overrides</h2>
+            
+            <form id="contentForm" onsubmit="saveContent(event)" class="space-y-6">
+                <div>
+                    <h3 class="text-[#00ffcc] text-sm font-bold uppercase mb-4 tracking-widest">>> Sector Visibility</h3>
+                    <div class="flex items-center gap-4 mb-2">
+                        <input type="checkbox" id="showQuestions" class="w-4 h-4 accent-[#00ffcc]">
+                        <label class="text-white text-sm">Enable "15 Queries" Section</label>
+                    </div>
+                    <div class="flex items-center gap-4 mb-2">
+                        <input type="checkbox" id="showBookPreview" class="w-4 h-4 accent-[#00ffcc]">
+                        <label class="text-white text-sm">Enable "Physical Artifacts" (Images) Section</label>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <input type="checkbox" id="showAuthor" class="w-4 h-4 accent-[#00ffcc]">
+                        <label class="text-white text-sm">Enable "Author POV" Section</label>
+                    </div>
+                </div>
+
+                <div class="pt-4 border-t border-white/10">
+                    <h3 class="text-[#ff007f] text-sm font-bold uppercase mb-4 tracking-widest">>> Marketplace Routing Links</h3>
+                    <input type="text" id="amazonLink" placeholder="Amazon URL" class="w-full bg-black border border-[#333] p-3 rounded text-white mb-3 focus:border-[#ff007f] outline-none text-sm">
+                    <input type="text" id="flipkartLink" placeholder="Flipkart URL" class="w-full bg-black border border-[#333] p-3 rounded text-white mb-3 focus:border-[#ff007f] outline-none text-sm">
+                    <input type="text" id="myntraLink" placeholder="Myntra Merch URL" class="w-full bg-black border border-[#333] p-3 rounded text-white focus:border-[#ff007f] outline-none text-sm">
+                </div>
+
+                <div class="pt-4 border-t border-white/10">
+                    <h3 class="text-[#7800ff] text-sm font-bold uppercase mb-4 tracking-widest">>> Visual Assets (Image URLs)</h3>
+                    <input type="text" id="authorPovImg" placeholder="Author Profile Image URL" class="w-full bg-black border border-[#333] p-3 rounded text-white focus:border-[#7800ff] outline-none text-sm">
+                </div>
+
+                <button type="submit" class="w-full bg-[#7800ff] text-white font-black py-4 rounded uppercase tracking-widest hover:bg-[#00ffcc] hover:text-black transition-all mt-4">
+                    Deploy Changes to Live Node <i class="fa-solid fa-satellite-dish ml-2"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const API_URL = 'http://localhost:5000/api';
+        let authToken = localStorage.getItem('adminToken');
+
+        if(authToken) { showDashboard(); loadCurrentContent(); }
+
+        async function handleLogin(e) {
+            e.preventDefault();
+            const u = document.getElementById('username').value;
+            const p = document.getElementById('password').value;
+            
+            try {
+                const res = await fetch(`${API_URL}/admin/login`, {
+                    method: 'POST', headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({username: u, password: p})
+                });
+                const data = await res.json();
+                if(data.token) {
+                    authToken = data.token;
+                    localStorage.setItem('adminToken', authToken);
+                    showDashboard();
+                    loadCurrentContent();
+                } else { alert('ACCESS DENIED: Invalid Credentials.'); }
+            } catch(e) { alert('Backend offline.'); }
+        }
+
+        function triggerReset() {
+            alert('PROTOCOL INITIATED: A secure password override link has been routed to RKUAMRJALORE@GMAIL.COM.');
+        }
+
+        function showDashboard() {
+            document.getElementById('loginView').classList.add('hidden');
+            document.getElementById('dashboardView').classList.remove('hidden');
+            document.getElementById('logoutBtn').classList.remove('hidden');
+        }
+
+        function logout() {
+            localStorage.removeItem('adminToken');
+            authToken = null;
+            document.getElementById('dashboardView').classList.add('hidden');
+            document.getElementById('logoutBtn').classList.add('hidden');
+            document.getElementById('loginView').classList.remove('hidden');
+        }
+
+        async function loadCurrentContent() {
+            try {
+                const res = await fetch(`${API_URL}/content`);
+                const content = await res.json();
+                
+                document.getElementById('showQuestions').checked = content.sections.questions;
+                document.getElementById('showBookPreview').checked = content.sections.artifacts;
+                document.getElementById('showAuthor').checked = content.sections.author;
+                
+                document.getElementById('amazonLink').value = content.links.amazon;
+                document.getElementById('flipkartLink').value = content.links.flipkart;
+                document.getElementById('myntraLink').value = content.links.myntra;
+                
+                document.getElementById('authorPovImg').value = content.images.authorProfile;
+            } catch(e) { console.error('Failed to load content config'); }
+        }
+
+        async function saveContent(e) {
+            e.preventDefault();
+            const payload = {
+                sections: {
+                    questions: document.getElementById('showQuestions').checked,
+                    artifacts: document.getElementById('showBookPreview').checked,
+                    author: document.getElementById('showAuthor').checked
+                },
+                links: {
+                    amazon: document.getElementById('amazonLink').value,
+                    flipkart: document.getElementById('flipkartLink').value,
+                    myntra: document.getElementById('myntraLink').value
+                },
+                images: {
+                    authorProfile: document.getElementById('authorPovImg').value
+                }
+            };
+
+            try {
+                const res = await fetch(`${API_URL}/content`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'Authorization': authToken },
+                    body: JSON.stringify(payload)
+                });
+                if(res.ok) {
+                    alert('SYSTEM UPDATED: Live changes have been successfully broadcasted to the main grid.');
+                } else { alert('UNAUTHORIZED: Session expired.'); logout(); }
+            } catch(e) { alert('Error updating system.'); }
+        }
+    </script>
+</body>
+</html>
